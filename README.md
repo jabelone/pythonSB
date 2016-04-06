@@ -45,7 +45,7 @@ pythonSB is very easy to use.  With just one small function you can control a se
 If they are "slack" or have no resistance, have they got power?  Please do NOT power them from the 5v rail on the pi.  I know it's tempting and it may work for 1 or 2 servos but it is NOT good for the pi.  Please use a separate battery or power supply.  If you're still having problems open an issue on GitHub.
 
 #### I get an error about importing pythonSB
-You need to make sure that pythonSB.py is in the same folder as you're project.  The easiest way is to download this entire GitHub repository and run the example.py command.  
+You need to make sure that pythonSB.py is in the same folder as you're project.  The easiest way is to download this entire GitHub repository and run the example.py program to see how it works.  
 
 #### It's still not working!
 Open an issue on GitHub and I'll try to help out.
