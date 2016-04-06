@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>pythonSB by jabelone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">pythonSB</h1>
+      <h2 class="project-tagline">An easy way to control servos from python.</h2>
+      <a href="https://github.com/jabelone/pythonSB" class="btn">View on GitHub</a>
+      <a href="https://github.com/jabelone/pythonSB/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jabelone/pythonSB/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h3>
+<a id="welcome-to-pythonsb" class="anchor" href="#welcome-to-pythonsb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to pythonSB</h3>
+
+<p>pythonSB (python Servo Blaster) is a python implementation of the <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">Servo Blaster</a> program. It's main purpose is to make it easier to control servos attached to your raspberry pi directly from python. It takes care of writing to the servo blaster file and allows you to set servo positions in degrees, motor/LED power levels in percent or manually set the timing in us (micro seconds).  All this with just two, simple functions in python.</p>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h3>
+
+<p>Great News! pythonSB is released under the <a href="https://www.google.com.au/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjOk4ujjfrLAhWne6YKHfj2AgkQFggcMAA&amp;url=http%3A%2F%2Fwww.gnu.org%2Flicenses%2Fgpl-3.0.en.html&amp;usg=AFQjCNH7LpUmtrHljmxxj2DxbaZqewm5Jw&amp;sig2=HGnNxRiqFclo4m0WipN2DQ">GNU GPL v3</a> or later license for all to freely enjoy.</p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h3>
+
+<p>This python module requires you to have the <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">Servo Blaster</a> program installed and running. To to do so please follow these instructions:</p>
+
+<p>1) Grab the <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">Servo Blaster</a> github repo from here:</p>
+
+<p><code>sudo apt-get install git</code></p>
+
+<p>then</p>
+
+<p><code>git clone https://github.com/richardghirst/PiBits.git</code></p>
+
+<p>2) Navigate to the program folder: </p>
+
+<p><code>cd PiBits/ServoBlaster/user</code></p>
+
+<p>3) Now we need to install Servo Blaster: </p>
+
+<p><code>sudo make install</code></p>
+
+<p>Depending on what dev tools you already have installed you might need some others. Open an issue on github if you need help. Now that it is installed, servo blaster should be running. For reference, you can use the following commands:</p>
+
+<p><code>sudo service servoblaster status</code> to see the current status of servo blaster</p>
+
+<p><code>sudo service servoblaster start</code> to start servo blaster</p>
+
+<p><code>sudo service servoblaster stop</code> to stop servo blaster</p>
+
+<p>However, you should never have to manually start/stop it, it should automatically start on boot.</p>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>pythonSB is very easy to use. With just one small function (and a setup/defining function) you can control a servo on any GPIO pin that Servo Blaster supports. You can see an example of how to use it in the example.py file in this repo.  <em>Every</em> function expects a physical pin number when asking for a servo pin.  <a href="https://learn.adafruit.com/assets/22318">This graphic</a> shows what the physical pin numbers are quite nicely.
+There are three main functions you can call and three main ways to control servos:</p>
+
+<h4>
+<a id="basic-servo_set-call" class="anchor" href="#basic-servo_set-call" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic servo_set() call</h4>
+
+<p>1) Import the pythonSB module by doing this in your python program: </p>
+
+<p><code>from pythonSB import *</code></p>
+
+<p>2) Manually set the pulse width for the servo, just call:</p>
+
+<p><code>servo_set(servoPin, servoOutput)</code></p>
+
+<p>Where servoPin is the <em>physical pin</em> on the <em>P1</em> header and servoOutput is the the pulse width (in us) to be output.</p>
+
+<h4>
+<a id="advanced-servo_set-call" class="anchor" href="#advanced-servo_set-call" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced servo_set() call</h4>
+
+<p>1) Import the pythonSB module by doing this in your python program: </p>
+
+<p><code>from pythonSB import *</code></p>
+
+<p>2) Manually set the output value by changing these options:</p>
+
+<p><code>servo_set(servoPin, servoOutput, servoPinType="", servoHeader=0)</code></p>
+
+<p><code>servoPin</code> is the servo pin as defined by <code>servoPinType</code>, <code>servoOutput</code> is the output in us, <code>servoPinType</code> is either blank (physical pin on P1 header), "servo" (servos as defined by servo blaster <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">here</a>), or "servoHeader" (the header, either 1 or 5 as explained <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">here</a>)</p>
+
+<h4>
+<a id="use-servo_configure-and-servo_set_angle" class="anchor" href="#use-servo_configure-and-servo_set_angle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use servo_configure() and servo_set_angle()</h4>
+
+<p>1) Import the pythonSB module by doing this in your python program: </p>
+
+<p><code>from pythonSB import *</code></p>
+
+<p>2) Call the setup function for each servo to define the physical pin number, min pulse, max pulse, min range, max range.  You can map the min/max range to any integer.  So for motor control you could map it from 0-100 or -90 to +90 for steering control. The min/max will always get mapped to the min/max output in us.</p>
+
+<p><code>servo_configure(1, 900, 2100, -90, 90)</code> would set servo 1 with an output range of 900-2100 us and an input range of -90 to +90. (perfect for steering)</p>
+
+<p><code>servo_configure(2, 1000, 2000, 0, 100)</code> would set servo 2 with an output range of 1000-2000 us and an input range of 0 to 100. (perfect for motor control)</p>
+
+<p>3) Call the servo_set function like so:</p>
+
+<p><code>servo_set_angle(1, 0)</code> would set the servo around the center.  (0 is center of -90 and +90) or <code>servo_set_angle(1, 90)</code> could turn full right.</p>
+
+<p><code>servo_set_angle(2, 75)</code> would set a PWM motor controller to around 75% throttle.  (0 is minimum and 100 is max)</p>
+
+<p>4) The example.py file has examples of different ways and explains how to use them.</p>
+
+<h3>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h3>
+
+<h4>
+<a id="the-servos-arent-responding-to-any-commands" class="anchor" href="#the-servos-arent-responding-to-any-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The servos aren't responding to any commands</h4>
+
+<p>If they are "slack" or have no resistance, have they got power? Please do NOT power them from the 5v rail on the pi. I know it's tempting and it may work for 1 or 2 servos but it is NOT good for the pi. Please use a separate battery or power supply. If you're still having problems open an issue on GitHub.</p>
+
+<h4>
+<a id="i-get-an-error-about-importing-pythonsb" class="anchor" href="#i-get-an-error-about-importing-pythonsb" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>I get an error about importing pythonSB</h4>
+
+<p>You need to make sure that pythonSB.py is in the same folder as you're project. The easiest way is to download this entire GitHub repository and run the example.py program to see how it works.</p>
+
+<h4>
+<a id="its-still-not-working" class="anchor" href="#its-still-not-working" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>It's still not working!</h4>
+
+<p>Open an issue on GitHub and I'll try to help out.</p>
+
+<h3>
+<a id="contributions" class="anchor" href="#contributions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributions</h3>
+
+<p>This project is being actively developed by Jaimyn Mayer (<a href="https://github.com/jabelone" class="user-mention">@jabelone</a>).  All additions or improvements should be done through a fork, then a pull request.  Anything that adds or fixes something and works well should be accepted.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jabelone/pythonSB">pythonSB</a> is maintained by <a href="https://github.com/jabelone">jabelone</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
