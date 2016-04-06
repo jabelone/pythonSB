@@ -76,7 +76,7 @@ def servo_set_angle(servoPin, servoAngle):
 	os.system("echo " + "P1-" + str(servoPin) + "=" + str(us) + " > /dev/servoblaster")
 	print us
 
-servo_configure(1, 900, 2100, -90, 90) #Steering - Pin number, min us output, max us output, min angle, max angle)
-servo_configure(2, 1000, 2000, 0, 100) #Motor - Pin number, min us output, max us output, min angle, max angle)
-servo_set_angle(1, 0) #Pin number and angle
+#servo_configure(1, 900, 2100, -90, 90) #Steering - Pin number, min us output, max us output, min angle, max angle)
+#servo_configure(2, 1000, 2000, 0, 100) #Motor - Pin number, min us output, max us output, min angle, max angle)
+#servo_set_angle(1, 0) #Pin number and angle
 #servo_set_angle(2, 75) #Pin number and angle
