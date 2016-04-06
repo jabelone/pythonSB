@@ -22,17 +22,6 @@ servo_minPulse = [0]*41 #crude way of "initialising" the list
 servo_maxPulse = [0]*41
 servo_minAngle = [0]*41
 servo_maxAngle = [0]*41
-						 
-def servo_initialise():
-	if os.path.isfile(__file__ + '-config.json'):
-		with open(__file__ + 'config.json', 'r') as f:
-			config = json.load(f)
-	else:
-		with open(__file__ + 'config.json', 'w') as f:
-			config = {}
-			json.dump(config, f)
-
-servo_initialise() #Initialise our config file
 
 def servo_set(servoPin, servoOutput, servoPinType="", servoHeader=0):
 	if (servoPinType == "servo"): #If we should use the servo numbers defined by Servo Blaster.
@@ -87,7 +76,7 @@ def servo_set_angle(servoPin, servoAngle):
 	os.system("echo " + "P1-" + str(servoPin) + "=" + str(us) + " > /dev/servoblaster")
 	print us
 
-#servo_configure(1, 900, 2100, -90, 90) #Steering - Pin number, min us output, max us output, min angle, max angle)
-#servo_configure(2, 1000, 2000, 0, 100) #Motor - Pin number, min us output, max us output, min angle, max angle)
-#servo_set_angle(1, -90) #Pin number and angle
+servo_configure(1, 900, 2100, -90, 90) #Steering - Pin number, min us output, max us output, min angle, max angle)
+servo_configure(2, 1000, 2000, 0, 100) #Motor - Pin number, min us output, max us output, min angle, max angle)
+servo_set_angle(1, 0) #Pin number and angle
 #servo_set_angle(2, 75) #Pin number and angle
