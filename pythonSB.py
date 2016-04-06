@@ -17,6 +17,22 @@
 # it like this: servo_set(12, "1500us", "header", 5)
  
 import os #needed to run the Servo Blaster commands
+servo_minPulse = [0]*41 #crude way of "initialising" the list
+						 #41 as there is only 40 output pins
+servo_maxPulse = [0]*41
+servo_minAngle = [0]*41
+servo_maxAngle = [0]*41
+						 
+def servo_initialise():
+	if os.path.isfile(__file__ + '-config.json'):
+		with open(__file__ + 'config.json', 'r') as f:
+			config = json.load(f)
+	else:
+		with open(__file__ + 'config.json', 'w') as f:
+			config = {}
+			json.dump(config, f)
+
+servo_initialise() #Initialise our config file
 
 def servo_set(servoPin, servoOutput, servoPinType="", servoHeader=0):
 	if (servoPinType == "servo"): #If we should use the servo numbers defined by Servo Blaster.
@@ -30,4 +46,48 @@ def servo_set(servoPin, servoOutput, servoPinType="", servoHeader=0):
 	else: #We use the physical pin number on header one by default
 		os.system("echo " + "P1-" + str(servoPin) + "=" + servoOutput + " > /dev/servoblaster")
 		#print("echo " + "P1-" + str(servoPin) + "=" + servoOutput + " > /dev/servoblaster")
-		
+
+def servo_map(value, oldMin, oldMax, newMin, newMax):
+    # Figure out how 'wide' each range is
+    oldSpan = oldMax - oldMin
+    newSpan = newMax - newMin
+
+    # Convert the old range into a 0-1 range (float)
+    valueScaled = float(value - oldMin) / float(oldSpan)
+
+    # Convert the 0-1 range into a value in the new range.
+    return newMin + (valueScaled * newSpan)
+
+def servo_configure(servoPin, minPulse, maxPulse, minAngle, maxAngle):
+	if minPulse is not None:
+		servo_minPulse[servoPin] = minPulse
+	elif (servo_minPulse[servoPin] == 0):
+		servo_minPulse[servoPin] = 1000
+	
+	if maxPulse is not None:
+		servo_maxPulse[servoPin] = maxPulse
+	elif (servo_maxPulse[servoPin] == 0):
+		servo_maxPulse[servoPin] = 2000
+	
+	if minAngle is not None:
+		servo_minAngle[servoPin] = minAngle
+	elif (servo_minAngle[servoPin] == 0):
+		servo_minAngle[servoPin] = 0
+	
+	if maxAngle is not None:
+		servo_maxAngle[servoPin] = maxAngle
+	elif (servo_maxAngle[servoPin] == 0):
+		servo_maxAngle[servoPin] = 90
+
+def servo_set_angle(servoPin, servoAngle): 
+	# Currently only supports physical pin numbers. If enough interest is generated I may 
+	# add support for all the diffferent types like the set_servo() funciton does above.
+	# You don't have to pass the min/max parameters if you like the defaults.
+	us = servo_map(servoAngle, servo_minAngle[servoPin], servo_maxAngle[servoPin], servo_minPulse[servoPin], servo_maxPulse[servoPin])
+	os.system("echo " + "P1-" + str(servoPin) + "=" + str(us) + " > /dev/servoblaster")
+	print us
+
+servo_configure(1, 900, 2100, -90, 90) #Steering - Pin number, min us output, max us output, min angle, max angle)
+servo_configure(2, 1000, 2000, 0, 100) #Motor - Pin number, min us output, max us output, min angle, max angle)
+servo_set_angle(1, -90) #Pin number and angle
+servo_set_angle(2, 75) #Pin number and angle

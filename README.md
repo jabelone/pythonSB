@@ -8,15 +8,19 @@ pythonSB is released under the GNU GPL v3 or later license for all to freely enj
 This python module requires you to have the Servo Blaster program installed and running.
 To to do so please follow these instructions:
 
-1) Grab the Servo Blaster github repo from here: https://goo.gl/ERQcQh
+1) Grab the Servo Blaser repo form GitHub:
+
 ```sudo apt-get install git```
 ```git clone https://github.com/richardghirst/PiBits.git```
 
 2) Navigate to the program folder:
+
 ```cd PiBits/ServoBlaster/user```
 
 3) Now we need to install Servo Blaster:
+
 ```sudo make install```
+
 Depending on what dev tools you already installed you might need some others.  Open an issue on github if you need help.
 
 Now that it is installed, servo blaster should be running.  For reference, you can use the following:
