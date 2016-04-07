@@ -3,10 +3,10 @@
 # page for the full license: http://www.gnu.org/licenses/gpl-3.0.en.html
 # This is part of pythonSB.  Github here: https://github.com/jabelone/pythonSB
 # 
-# This example file shows how to use all features of pythonSB
+# This example file shows how to use all features of pythonSB.
 #  
+# 1000us/2000us is normally the extremes and 1500us is centered.
 # Most servos have a range from about 1000us to about 2000us.
-# 1000us/2000us is normally the extremes and 1500us is centered.  
 
 from pythonSB import * #We need to import the pythonSB module
 

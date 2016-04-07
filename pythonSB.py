@@ -66,7 +66,7 @@ def servo_configure(servoPin, minPulse, maxPulse, minAngle, maxAngle):
 	if maxAngle is not None:
 		servo_maxAngle[servoPin] = maxAngle
 	elif (servo_maxAngle[servoPin] == 0):
-		servo_maxAngle[servoPin] = 90
+		servo_maxAngle[servoPin] = 100
 
 def servo_set_angle(servoPin, servoAngle): 
 	# Currently only supports physical pin numbers. If enough interest is generated I may 
@@ -74,7 +74,7 @@ def servo_set_angle(servoPin, servoAngle):
 	# You don't have to pass the min/max parameters if you like the defaults.
 	us = servo_map(servoAngle, servo_minAngle[servoPin], servo_maxAngle[servoPin], servo_minPulse[servoPin], servo_maxPulse[servoPin])
 	os.system("echo " + "P1-" + str(servoPin) + "=" + str(us) + " > /dev/servoblaster")
-	print us
+	#print us
 
 #servo_configure(1, 900, 2100, -90, 90) #Steering - Pin number, min us output, max us output, min angle, max angle)
 #servo_configure(2, 1000, 2000, 0, 100) #Motor - Pin number, min us output, max us output, min angle, max angle)
