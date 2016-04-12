@@ -10,8 +10,9 @@ To to do so please follow these instructions:
 
 1) Grab the Servo Blaser repo form GitHub:
 
-```sudo apt-get install git
-git clone https://github.com/richardghirst/PiBits.git```
+```sudo apt-get install git```
+
+```git clone https://github.com/richardghirst/PiBits.git```
 
 2) Navigate to the program folder:
 
